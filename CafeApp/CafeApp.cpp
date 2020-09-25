@@ -8,6 +8,8 @@ using namespace std;
 #include "Order.h"
 #include "Drink.h"
 #include "Meat.h"
+#include "Snack.h"
+#include "Veggie.h"
 
 void shopping();
 
@@ -41,6 +43,8 @@ void shopping() {
     Order order;
     Drink drink;
     Meat meat;
+    Snack snack;
+    Veggie veggie;
 
     while (!isDone) {
         int menuChoice = 0;
@@ -82,6 +86,28 @@ void shopping() {
             }
             break;
         }
+        case 3: { // add Snack
+            while (!goBack) {
+                meat.PrintMenu(snack.GetNames());
+                cin >> itemChoice;
+                if (itemChoice != 99)
+                    order.AddItem(snack.GetItem(itemChoice - 1));
+                else
+                    goBack = true;
+            }
+            break;
+        }
+        case 4: { // add Veggie
+            while (!goBack) {
+                meat.PrintMenu(veggie.GetNames());
+                cin >> itemChoice;
+                if (itemChoice != 99)
+                    order.AddItem(veggie.GetItem(itemChoice - 1));
+                else
+                    goBack = true;
+            }
+            break;
+        }
         default: { // default
             cout << "opps" << " you entered " << menuChoice << endl;
             break;
@@ -97,7 +123,7 @@ void shopping() {
         cout << "\nWould you like to remove an item? 1) Yes 2) No: ";
         cin >> choice;
 
-        if (choice == 1) { 
+        if ((choice == 1) && (order.GetItemNum() > 0)) { 
             order.PrintItemsWithIndex();
             cin >> choice;
             order.RemoveItem(choice - 1);

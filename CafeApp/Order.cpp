@@ -28,3 +28,7 @@ void Order::PrintItemsWithIndex() {
 		cout << i << ") " << items[i - 1] << endl;
 	}
 } // PrintItems()
+
+int Order::GetItemNum() {
+	return items.size();
+}

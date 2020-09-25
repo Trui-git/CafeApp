@@ -14,7 +14,7 @@ public:
 	void ClearItems();
 	void PrintItems();
 	void PrintItemsWithIndex();
-
+	int GetItemNum();
 private:
 	vector<string> items;
 };
