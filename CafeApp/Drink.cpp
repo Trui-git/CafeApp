@@ -30,3 +30,7 @@ vector<string> Drink::GetNames() {
 string Drink::GetItem(int idx) {
 	return names.at(idx);
 }
+
+int Drink::GetItemCount() {
+	return names.size();
+}

@@ -29,3 +29,7 @@ vector<string> Snack::GetNames() {
 string Snack::GetItem(int idx) {
 	return names.at(idx);
 }
+
+int Snack::GetItemCount() {
+	return names.size();
+}

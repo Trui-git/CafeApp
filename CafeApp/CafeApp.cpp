@@ -26,6 +26,15 @@ int main()
 
         cout << "\nShopping again? 1) Yes 2) No: ";
         cin >> shoppingAgain;
+
+        while (cin.fail()) {
+            cout << "Error" << endl;
+            cout << "Please select 1 or 2 only: ";
+            cin.clear();
+            cin.ignore(256, '\n');
+            cin >> shoppingAgain;
+        }
+
     } // for (;;)
     
     return 0;
@@ -59,6 +68,14 @@ void shopping() {
 
         cin >> menuChoice;
 
+        while (cin.fail()) {
+            cout << "Error" << endl;
+            cout << "Please select 1 - 4 or 99 only: ";
+            cin.clear();
+            cin.ignore(256, '\n');
+            cin >> menuChoice;
+        }
+
         switch (menuChoice) {
         case 99: { // exit
             isDone = true;
@@ -68,10 +85,24 @@ void shopping() {
             while (!goBack) {
                 drink.PrintMenu(drink.GetNames());
                 cin >> itemChoice;
-                if (itemChoice != 99)
-                    order.AddItem(drink.GetItem(itemChoice - 1));
-                else
+
+                while (cin.fail()) {                  
+                    cout << "Please select 1 - " << drink.GetItemCount() << " or 99 only: ";
+                    cin.clear();
+                    cin.ignore(256, '\n');
+                    cin >> itemChoice;
+                }
+            
+                if (itemChoice == 99) {
                     goBack = true;
+                    continue;
+                }
+                if (itemChoice != 99) {
+                    if (itemChoice < 1 || itemChoice > drink.GetItemCount())
+                        continue;
+                    else
+                        order.AddItem(drink.GetItem(itemChoice - 1));
+                }                    
             }
             break;
         }
@@ -79,32 +110,74 @@ void shopping() {
             while (!goBack) {
                 meat.PrintMenu(meat.GetNames());
                 cin >> itemChoice;
-                if (itemChoice != 99)
-                    order.AddItem(meat.GetItem(itemChoice - 1));
-                else
+
+                while (cin.fail()) {
+                    cout << "Please select 1 - " << meat.GetItemCount() << " or 99 only: ";
+                    cin.clear();
+                    cin.ignore(256, '\n');
+                    cin >> itemChoice;
+                }
+
+                if (itemChoice == 99) {
                     goBack = true;
+                    continue;
+                }
+                if (itemChoice != 99) {
+                    if (itemChoice < 1 || itemChoice > meat.GetItemCount())
+                        continue;
+                    else
+                        order.AddItem(meat.GetItem(itemChoice - 1));
+                }
             }
             break;
         }
         case 3: { // add Snack
             while (!goBack) {
-                meat.PrintMenu(snack.GetNames());
+                snack.PrintMenu(snack.GetNames());
                 cin >> itemChoice;
-                if (itemChoice != 99)
-                    order.AddItem(snack.GetItem(itemChoice - 1));
-                else
+
+                while (cin.fail()) {
+                    cout << "Please select 1 - " << snack.GetItemCount() << " or 99 only: ";
+                    cin.clear();
+                    cin.ignore(256, '\n');
+                    cin >> itemChoice;
+                }
+
+                if (itemChoice == 99) {
                     goBack = true;
+                    continue;
+                }
+                if (itemChoice != 99) {
+                    if (itemChoice < 1 || itemChoice > snack.GetItemCount())
+                        continue;
+                    else
+                        order.AddItem(snack.GetItem(itemChoice - 1));
+                }
             }
             break;
         }
         case 4: { // add Veggie
             while (!goBack) {
-                meat.PrintMenu(veggie.GetNames());
+                veggie.PrintMenu(veggie.GetNames());
                 cin >> itemChoice;
-                if (itemChoice != 99)
-                    order.AddItem(veggie.GetItem(itemChoice - 1));
-                else
+
+                while (cin.fail()) {
+                    cout << "Please select 1 - " << veggie.GetItemCount() << " or 99 only: ";
+                    cin.clear();
+                    cin.ignore(256, '\n');
+                    cin >> itemChoice;
+                }
+
+                if (itemChoice == 99) {
                     goBack = true;
+                    continue;
+                }
+                if (itemChoice != 99) {
+                    if (itemChoice < 1 || itemChoice > veggie.GetItemCount())
+                        continue;
+                    else
+                        order.AddItem(veggie.GetItem(itemChoice - 1));
+                }
             }
             break;
         }
@@ -123,9 +196,24 @@ void shopping() {
         cout << "\nWould you like to remove an item? 1) Yes 2) No: ";
         cin >> choice;
 
+        while (cin.fail()) {
+            cout << "Please select 1 or 2 only: ";
+            cin.clear();
+            cin.ignore(256, '\n');
+            cin >> choice;
+        }
+
         if ((choice == 1) && (order.GetItemNum() > 0)) { 
             order.PrintItemsWithIndex();
             cin >> choice;
+
+            while (cin.fail()) {
+                cout << "Please select 1 - " << order.GetItemNum() << " only: ";
+                cin.clear();
+                cin.ignore(256, '\n');
+                cin >> choice;
+            }
+
             order.RemoveItem(choice - 1);
             order.PrintItems();
         }

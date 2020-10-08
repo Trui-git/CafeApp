@@ -17,6 +17,7 @@ class Meat : public Food {
 		void SetNames();
 		vector<string> GetNames();
 		string GetItem(int idx);
+		int GetItemCount();
 	private:
 		string desc;
 		vector<string> names;

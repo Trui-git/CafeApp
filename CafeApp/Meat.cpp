@@ -32,3 +32,6 @@ vector<string> Meat::GetNames() {
 string Meat::GetItem(int idx) {
 	return names.at(idx);
 }
+int Meat::GetItemCount() {
+	return names.size();
+}

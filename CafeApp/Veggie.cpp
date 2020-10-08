@@ -29,3 +29,7 @@ vector<string> Veggie::GetNames() {
 string Veggie::GetItem(int idx) {
 	return names.at(idx);
 }
+
+int Veggie::GetItemCount() {
+	return names.size();
+}
